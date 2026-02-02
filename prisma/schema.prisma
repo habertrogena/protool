@@ -1,0 +1,27 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Lead {
+  id               Int      @id @default(autoincrement())
+  name             String
+  phone            String?   @unique
+  category         String?
+  location         String?
+  website          String?      // NEW
+  source           String
+  score            Int
+  potentialScore   Int?         // NEW: opportunity score
+  potentialCategory String?     // NEW: High / Medium / Low
+  aiNotes          String?      // NEW: optional AI explanation
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
